@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+    <title>Med Drone Delivery</title>
+    <style>
+        /* Existing styles remain unchanged */
+
+        /* About section styles */
+        .about {
+            background-color: #f9f9f9; /* Light gray background */
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .team-member {
+            margin-bottom: 40px;
+        }
+
+        .team-member img {
+    width: 100%; /* Make the image fill the container width */
+    height: auto; /* Automatically adjust height to maintain aspect ratio */
+    margin-bottom: 20px;
+    }
+
+        .team-member h3 {
+            margin-bottom: 10px;
+            color: #333; /* Dark gray text color */
+        }
+
+        .team-member p {
+            color: #666; /* Medium gray text color */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and other sections remain unchanged -->
+
+    <header>
+        <nav>
+            <div class="menu-icon">
+                <span class="fas fa-bars"></span>
+            </div>
+            <div class="logo">
+                <a href="homepage.html"
+                    ><img
+                        src="Logo.png"
+                        alt=""
+                        width="200px"
+                        height="150px"
+                /></a>
+            </div>
+            <div class="nav-items">
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="AboutTeams.html">Contact</a></li>
+                <li><a href="#">Feedback</a></li>
+            </div>
+            <div class="search-icon">
+                <span class="fas fa-search"></span>
+            </div>
+            <div class="cancel-icon">
+                <span class="fas fa-times"></span>
+            </div>
+            <form action="#">
+                <input
+                    type="search"
+                    class="search-data"
+                    placeholder="Search"
+                    required
+                />
+                <button type="submit" class="fas fa-search"></button>
+            </form>
+        </nav>
+        <script>
+            const menuBtn = document.querySelector(".menu-icon span");
+            const searchBtn = document.querySelector(".search-icon");
+            const cancelBtn = document.querySelector(".cancel-icon");
+            const items = document.querySelector(".nav-items");
+            const form = document.querySelector("form");
+            menuBtn.onclick = () => {
+                items.classList.add("active");
+                menuBtn.classList.add("hide");
+                searchBtn.classList.add("hide");
+                cancelBtn.classList.add("show");
+            };
+            cancelBtn.onclick = () => {
+                items.classList.remove("active");
+                menuBtn.classList.remove("hide");
+                searchBtn.classList.remove("hide");
+                cancelBtn.classList.remove("show");
+                form.classList.remove("active");
+                cancelBtn.style.color = "#ff3d00";
+            };
+            searchBtn.onclick = () => {
+                form.classList.add("active");
+                searchBtn.classList.add("hide");
+                cancelBtn.classList.add("show");
+            };
+        </script>
+    </header>
+
+    <main>
+        <!-- Existing sections remain unchanged -->
+
+        <!-- About section -->
+        <section class="about">
+            <div class="container">
+                <div class=" Meet the team">
+                    <img src="Meet the team.png" alt="Team Members">
+                </div>
+                <div class="team-member">
+                    <img src="team-member1.png" alt="Team Member 1">
+                    
+                    
+                </div>
+                <div class="team-member">
+                    <img src="team-member2.png" alt="Team Member 2">
+                    
+                    
+                </div>
+                <div class="team-member">
+                    <img src="team-member3.png" alt="Team Member 3">
+                    
+                </div>
+                <div class="team-member">
+                    <img src="team-member4.png" alt="Team Member 4">
+                   
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer and script remain unchanged -->
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <img
+                    src="Logo.png"
+                    alt="Company Logo"
+                    class="footer-logo"
+                    width="200px"
+                    height="150px"
+                />
+                <!-- Additional brand information can go here -->
+            </div>
+            <div class="footer-section">
+                <h4>OUR PRODUCTS</h4>
+                <ul>
+                    <li><a href="#">Medical Products Finder</a></li>
+                    <li><a href="#">Drone-Med Solutions</a></li>
+                    <!-- Add more list items here -->
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONSUMER HEALTH DATA NOTICE</h4>
+                <ul>
+                    <li><a href="#">Find a Specialist</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <!-- Add more list items here -->
+                </ul>
+            </div>
+            <!-- Repeat the above div for each column in the footer -->
+            <div class="footer-section">
+                <h4>CONTACT US</h4>
+                <ul>
+                    <li><a href="#">Countries and Regions</a></li>
+                    <li><a href="#">User Content Permission Terms</a></li>
+                    <!-- Add more list items here -->
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>
+                This site is intended for US consumers. Cookies and related
+                technology are used for advertising. To learn more or
+                opt-out, visit AdChoices and our Privacy Policy.
+            </p>
+            <p>
+                Drone-Med does not treat underlying Medical conditions. MVE
+                is a registered trademark of DFB Technology, Ltd. Patent No.
+                6,709,663. © 2024 Drone-Med
+            </p>
+            <div class="social-media">
+                <!-- Social media icons -->
+                <img
+                    src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
+                />
+                <img
+                    src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-white-icon.png"
+                />
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1024px-Instagram-Icon.png"
+                />
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

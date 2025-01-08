@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="checkout.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+        <title>Checkout</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="menu-icon">
+                    <span class="fas fa-bars"></span>
+                </div>
+                <div class="logo">
+                    <a href="homepage.html"
+                        ><img
+                            src="Logo.png"
+                            alt=""
+                            width="200px"
+                            height="150px"
+                    /></a>
+                </div>
+                <div class="nav-items">
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </div>
+                <div class="search-icon">
+                    <span class="fas fa-search"></span>
+                </div>
+                <div class="cancel-icon">
+                    <span class="fas fa-times"></span>
+                </div>
+                <form action="#">
+                    <input
+                        type="search"
+                        class="search-data"
+                        placeholder="Search"
+                        required
+                    />
+                    <button type="submit" class="fas fa-search"></button>
+                </form>
+            </nav>
+            <script>
+                const menuBtn = document.querySelector(".menu-icon span");
+                const searchBtn = document.querySelector(".search-icon");
+                const cancelBtn = document.querySelector(".cancel-icon");
+                const items = document.querySelector(".nav-items");
+                const form = document.querySelector("form");
+                menuBtn.onclick = () => {
+                    items.classList.add("active");
+                    menuBtn.classList.add("hide");
+                    searchBtn.classList.add("hide");
+                    cancelBtn.classList.add("show");
+                };
+                cancelBtn.onclick = () => {
+                    items.classList.remove("active");
+                    menuBtn.classList.remove("hide");
+                    searchBtn.classList.remove("hide");
+                    cancelBtn.classList.remove("show");
+                    form.classList.remove("active");
+                    cancelBtn.style.color = "#ff3d00";
+                };
+                searchBtn.onclick = () => {
+                    form.classList.add("active");
+                    searchBtn.classList.add("hide");
+                    cancelBtn.classList.add("show");
+                };
+            </script>
+        </header>
+
+        <h1>Checkout</h1>
+        <form id="checkoutForm" action="orderconfirmation.html" method="GET">
+            <label for="First Name">First Name:</label>
+            <input type="text" id="First Name" name="First Name" required />
+
+            <label for="Last Name">Last Name:</label>
+            <input type="text" id="First Name" name="Last Name" required />
+            <label for="address">Street Address:</label>
+            <input type="text" id="address" name="address" required />
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required />
+
+            <label for="state">State:</label>
+
+            <select id="state" name="state" required>
+                <option value="">Select State</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <!-- Add more options for all states -->
+            </select>
+
+            <label for="zip">Postal Code:</label>
+            <input type="text" id="zip" name="zip" required />
+
+            <input type="submit" value="Submit Order" />
+        </form>
+
+        <footer>
+            <p>&copy; 2024 Drone Delivery</p>
+        </footer>
+
+        <script src="script.js"></script>
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img
+                        src="Logo.png"
+                        alt="Company Logo"
+                        class="footer-logo"
+                        width="200px"
+                        height="150px"
+                    />
+                    <!-- Additional brand information can go here -->
+                </div>
+                <div class="footer-section">
+                    <h4>OUR PRODUCTS</h4>
+                    <ul>
+                        <li><a href="#">Medical Products Finder</a></li>
+                        <li><a href="#">Drone-Med Solutions</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONSUMER HEALTH DATA NOTICE</h4>
+                    <ul>
+                        <li><a href="#">Find a Specialist</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+                <!-- Repeat the above div for each column in the footer -->
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <ul>
+                        <li><a href="#">Countries and Regions</a></li>
+                        <li><a href="#">User Content Permission Terms</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    This site is intended for US consumers. Cookies and related
+                    technology are used for advertising. To learn more or
+                    opt-out, visit AdChoices and our Privacy Policy.
+                </p>
+                <p>
+                    Drone-Med does not treat underlying Medical conditions. MVE
+                    is a registered trademark of DFB Technology, Ltd. Patent No.
+                    6,709,663. © 2024 Drone-Med
+                </p>
+                <div class="social-media">
+                    <!-- Social media icons -->
+                    <img
+                        src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
+                    />
+                    <img
+                        src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-white-icon.png"
+                    />
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1024px-Instagram-Icon.png"
+                    />
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

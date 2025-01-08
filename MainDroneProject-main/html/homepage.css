@@ -1,0 +1,261 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+body {
+}
+
+.carousel-item img {
+    height: 50rem;
+}
+.products-section {
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 5%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.product-grid {
+    /* padding: 20px; */
+    display: flex;
+    flex-wrap: wrap;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.products-section h1 {
+    text-align: center;
+    margin: 5rem;
+    font-family: DIN-Medium;
+    color: #0e3353;
+    font-size: 5rem;
+    line-height: 2.9rem;
+    letter-spacing: -0.02875rem;
+}
+.products-section .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: flex-start;
+    align-items: flex-start; */
+    gap: 10px;
+}
+.products-section .product-grid img {
+    background-color: #ececec;
+    width: 37rem;
+    height: 45rem;
+    padding: 90px;
+    border-radius: 3px;
+    margin: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+@media (max-width: 2000px) {
+    .products-section .product-grid {
+        justify-content: center;
+        align-items: center;
+    }
+    .products-section {
+        text-align: center;
+    }
+}
+.products-section .product-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.all_products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.all_products button {
+    padding: 35px;
+    margin: 30px;
+    color: #000;
+    width: 30%;
+    font-size: 2em;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+}
+.all_products button:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #555;
+}
+
+/* STAY INFORMED SECTION */
+.stay_informed {
+    background-color: #262626;
+    padding: 40px;
+    color: white;
+}
+
+.stay_informed p {
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 30px;
+    max-width: 2000px;
+}
+
+.stay_informed h1 {
+    text-align: center;
+    padding-bottom: 30px;
+}
+.stay_informed h3 {
+    text-align: center;
+}
+.email_sub input {
+    width: 800px;
+    height: 80px;
+    font-size: 30px;
+}
+.email_sub input::placeholder {
+    font-size: 28px;
+}
+
+.email_sub button {
+    width: 220px;
+    height: 80px;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 30px;
+}
+.email_sub button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+.email_sub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 35px 0px;
+}
+
+.email_sub input[type="email"] {
+    padding: 10px;
+    border: 1px solid rgb(61, 60, 60);
+    border-radius: 4px 0 0 4px;
+    margin-right: -1px;
+}
+.email_sub input[type="email"]:focus,
+.email_sub button:focus {
+    outline: none;
+}
+
+/*  INTRO SECTION */
+.intro-section {
+    background: #262626;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+    margin-top: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.intro-section h2,
+.intro-section p {
+    /* color: #333;  */
+    margin: 0 0 1rem;
+}
+
+.intro-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.intro-section p {
+    font-size: 2rem;
+    line-height: 1.6;
+}
+
+/* Class added on scroll into view for animation */
+.intro-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+    .intro-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .intro-section p {
+        font-size: 1.5rem;
+    }
+}
+
+.question-section {
+    background-color: white; /* Or the background color of your choice */
+    text-align: center;
+    padding: 2rem;
+}
+
+.question-section .info-text {
+    color: #007bff; /* Blue color for the subtitle text */
+    font-weight: bold;
+    font-size: 2rem;
+    letter-spacing: 1px; /* Space out the letters */
+    text-transform: uppercase; /* UPPERCASE letters */
+    margin-bottom: 1rem; /* Space below the subtitle */
+}
+
+.question-section .question-title {
+    color: #333333; /* Dark text color */
+    font-weight: bold;
+    font-size: 2.5rem; /* Larger font size for the title */
+    margin-bottom: 2rem; /* Space below the title */
+}
+
+.question-section .buttons {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 1rem; /* Spacing between buttons */
+}
+
+.question-section button {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none;
+    padding: 1.5rem 5rem; /* Padding inside the buttons */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Cursor for clickable items */
+    font-size: 1.25rem;
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.question-section button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+    .question-section .buttons {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+
+    .question-section button {
+        width: 100%; /* Full width buttons on small screens */
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
+
+    /* Last button should not have a margin at the bottom */
+    .question-section button:last-child {
+        margin-bottom: 0;
+    }
+}

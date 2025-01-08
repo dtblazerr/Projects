@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="Products.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+        <title>Browse Products</title>
+        <style>
+            /* Loading animation CSS */
+            .loading-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.9);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999; /* Ensure the loading screen appears on top of other content */
+            }
+
+            .loader {
+                border: 8px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 8px solid #3498db;
+                width: 50px;
+                height: 50px;
+                animation: spin 2s linear infinite;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* Hide content initially */
+            #objectContainer {
+                display: none;
+                flex-wrap: wrap; /* Allow items to wrap to the next line */
+                justify-content: space-between; /* Distribute items evenly with space between */
+                align-items: flex-start; /* Align items to the start of the flex container */
+                max-width: 100%;
+            }
+
+            .objectContainerItem {
+                margin-bottom: 20px; /* Add spacing between rows */
+                flex-basis: calc(
+                    25% - 20px
+                ); /* Set the width of each item to 25% minus margin */
+                text-align: center; /* Center align the items */
+                padding: 10px; /* Add padding inside the border */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Apply soft and faded box-shadow */
+            }
+            .objectContainerItem:hover {
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Apply a stronger box-shadow on hover */
+            }
+
+            .objectContainerItem:hover .btn {
+                background-color: #3498db; /* Change background color of button on hover */
+                color: #fff; /* Change text color of button on hover */
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Loading animation -->
+        <div class="loading-screen">
+            <img src="droneload.gif" alt="Loading Icon" />
+        </div>
+
+        <!-- Rest of your HTML content -->
+        <header>
+            <nav>
+                <div class="menu-icon">
+                    <span class="fas fa-bars"></span>
+                </div>
+                <div class="logo">
+                    <a href="homepage.html"
+                        ><img
+                            src="Logo.png"
+                            alt=""
+                            width="200px"
+                            height="150px"
+                    /></a>
+                </div>
+                <div class="nav-items">
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="AboutTeams.html">Contact</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </div>
+                <div class="search-icon">
+                    <span class="fas fa-search"></span>
+                </div>
+                <div class="cancel-icon">
+                    <span class="fas fa-times"></span>
+                </div>
+                <form action="#">
+                    <input
+                        type="search"
+                        class="search-data"
+                        placeholder="Search"
+                        required
+                    />
+                    <button type="submit" class="fas fa-search"></button>
+                </form>
+            </nav>
+            <script>
+                const menuBtn = document.querySelector(".menu-icon span");
+                const searchBtn = document.querySelector(".search-icon");
+                const cancelBtn = document.querySelector(".cancel-icon");
+                const items = document.querySelector(".nav-items");
+                const form = document.querySelector("form");
+                menuBtn.onclick = () => {
+                    items.classList.add("active");
+                    menuBtn.classList.add("hide");
+                    searchBtn.classList.add("hide");
+                    cancelBtn.classList.add("show");
+                };
+                cancelBtn.onclick = () => {
+                    items.classList.remove("active");
+                    menuBtn.classList.remove("hide");
+                    searchBtn.classList.remove("hide");
+                    cancelBtn.classList.remove("show");
+                    form.classList.remove("active");
+                    cancelBtn.style.color = "#ff3d00";
+                };
+                searchBtn.onclick = () => {
+                    form.classList.add("active");
+                    searchBtn.classList.add("hide");
+                    cancelBtn.classList.add("show");
+                };
+            </script>
+        </header>
+
+        <div id="objectContainer"></div>
+
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1121.0.min.js"></script>
+        <script>
+            // JavaScript code
+            // Initialize the Amazon Cognito credentials provider
+            AWS.config.region = "us-east-2";
+            AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                IdentityPoolId:
+                    "us-east-2:500331eb-f6d5-4a03-87ae-15dcf36f049c",
+            });
+
+            // Create S3 service object
+            var s3 = new AWS.S3();
+
+            // Parameters for listObjectsV2 call
+            var params = {
+                Bucket: "drone-med",
+            };
+
+            // Retrieve the objects in the bucket
+            s3.listObjectsV2(params, function (err, data) {
+                if (err) {
+                    console.log("Error listing objects: " + err);
+                } else {
+                    // Show content and hide loading animation
+                    document.querySelector(".loading-screen").style.display =
+                        "none";
+                    document.getElementById("objectContainer").style.display =
+                        "flex";
+
+                    // Iterate through the objects and display them
+                    data.Contents.forEach(function (object) {
+                        var objectUrl =
+                            "https://" +
+                            params.Bucket +
+                            ".s3.amazonaws.com/" +
+                            object.Key;
+                        var imageElement = document.createElement("img");
+                        imageElement.src = objectUrl;
+                        imageElement.alt = object.Key;
+
+                        // Create a button for each image
+                        var button = document.createElement("button");
+                        button.className = "btn add-to-cart";
+                        button.setAttribute("data-product-id", object.Key); // Assuming the object key can serve as the product ID
+                        button.textContent = "Add to Cart";
+
+                        var link = document.createElement("a");
+                        link.href = "checkout.html"; // Replace with your add to cart endpoint
+                        link.appendChild(button);
+
+                        // Create a div to hold the image, price, and button
+                        var container = document.createElement("div");
+                        container.className = "objectContainerItem"; // Add a class to style the container
+                        container.appendChild(imageElement);
+
+                        // Retrieve the tags associated with the object
+                        var getObjectTagParams = {
+                            Bucket: params.Bucket,
+                            Key: object.Key,
+                        };
+
+                        s3.getObjectTagging(
+                            getObjectTagParams,
+                            function (err, tagData) {
+                                if (err) {
+                                    console.log(
+                                        "Error getting object tags: " + err
+                                    );
+                                } else {
+                                    // Iterate through the tags to find the price tag
+                                    var priceValue = null;
+                                    tagData.TagSet.forEach(function (tag) {
+                                        if (tag.Key === "price") {
+                                            priceValue = tag.Value;
+                                        }
+                                    });
+
+                                    // Create a paragraph element to display the price
+                                    var priceElement =
+                                        document.createElement("p");
+                                    priceElement.textContent =
+                                        "price " + priceValue;
+                                    priceElement.style.fontFamily =
+                                        "Abril Fatface";
+
+                                    document.body.appendChild(priceElement);
+
+                                    // Append the price element and button to the container
+                                    container.appendChild(priceElement);
+                                    container.appendChild(link);
+                                }
+                            }
+                        );
+
+                        // Append the container to the main container
+                        document
+                            .getElementById("objectContainer")
+                            .appendChild(container);
+                    });
+                }
+            });
+        </script>
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img
+                        src="Logo.png"
+                        alt="Company Logo"
+                        class="footer-logo"
+                        width="200px"
+                        height="150px"
+                    />
+                    <!-- Additional brand information can go here -->
+                </div>
+                <div class="footer-section">
+                    <h4>OUR PRODUCTS</h4>
+                    <ul>
+                        <li><a href="#">Medical Products Finder</a></li>
+                        <li><a href="#">Drone-Med Solutions</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONSUMER HEALTH DATA NOTICE</h4>
+                    <ul>
+                        <li><a href="#">Find a Specialist</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+                <!-- Repeat the above div for each column in the footer -->
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <ul>
+                        <li><a href="#">Countries and Regions</a></li>
+                        <li><a href="#">User Content Permission Terms</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    This site is intended for US consumers. Cookies and related
+                    technology are used for advertising. To learn more or
+                    opt-out, visit AdChoices and our Privacy Policy.
+                </p>
+                <p>
+                    Drone-Med does not treat underlying Medical conditions. MVE
+                    is a registered trademark of DFB Technology, Ltd. Patent No.
+                    6,709,663. © 2024 Drone-Med
+                </p>
+                <div class="social-media">
+                    <!-- Social media icons -->
+                    <img
+                        src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
+                    />
+                    <img
+                        src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-white-icon.png"
+                    />
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1024px-Instagram-Icon.png"
+                    />
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

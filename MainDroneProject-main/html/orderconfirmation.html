@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Order Confirmation</title>
+        <!-- Load the Google Maps JavaScript API -->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHxmeGnPk6rusDTTfZlpG6qhPzPCPwZr4&callback=initMap"
+            async
+            defer
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+    </head>
+    <style>
+        /* !NAVBAR SECTION! */
+
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap");
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            box-sizing: border-box;
+            font-family: "Montserrat", sans-serif;
+        }
+        body {
+            background: #f2f2f2;
+            font-family: "Roboto", sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-bottom: 0.8rem;
+            color: #fffffff5;
+        }
+        h10,
+        h7 {
+            margin-bottom: 0.8rem;
+            color: #000000f5;
+            font-weight: bolder;
+            font-size: 19px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        header {
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+            /* border-radius: 5px; */
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        #map {
+            height: 300px;
+            border-radius: 8px;
+            flex: 1;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .order-details {
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+            background-color: #2d2d2d;
+            color: white;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-icons img {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+        }
+
+        .faq {
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .promo-code {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq h3 {
+            color: #000000;
+        }
+
+        .faq p {
+            padding-top: 10px;
+        }
+    </style>
+    <body>
+        <header>
+            <nav>
+                <div class="menu-icon">
+                    <span class="fas fa-bars"></span>
+                </div>
+                <div class="logo">
+                    <a href="homepage.html"
+                        ><img
+                            src="Logo.png"
+                            alt=""
+                            width="200px"
+                            height="150px"
+                    /></a>
+                </div>
+                <div class="nav-items">
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="AboutTeams.html">Contact</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </div>
+                <div class="search-icon">
+                    <span class="fas fa-search"></span>
+                </div>
+                <div class="cancel-icon">
+                    <span class="fas fa-times"></span>
+                </div>
+                <form action="#">
+                    <input
+                        type="search"
+                        class="search-data"
+                        placeholder="Search"
+                        required
+                    />
+                    <button type="submit" class="fas fa-search"></button>
+                </form>
+            </nav>
+            <script>
+                const menuBtn = document.querySelector(".menu-icon span");
+                const searchBtn = document.querySelector(".search-icon");
+                const cancelBtn = document.querySelector(".cancel-icon");
+                const items = document.querySelector(".nav-items");
+                const form = document.querySelector("form");
+                menuBtn.onclick = () => {
+                    items.classList.add("active");
+                    menuBtn.classList.add("hide");
+                    searchBtn.classList.add("hide");
+                    cancelBtn.classList.add("show");
+                };
+                cancelBtn.onclick = () => {
+                    items.classList.remove("active");
+                    menuBtn.classList.remove("hide");
+                    searchBtn.classList.remove("hide");
+                    cancelBtn.classList.remove("show");
+                    form.classList.remove("active");
+                    cancelBtn.style.color = "#ff3d00";
+                };
+                searchBtn.onclick = () => {
+                    form.classList.add("active");
+                    searchBtn.classList.add("hide");
+                    cancelBtn.classList.add("show");
+                };
+            </script>
+        </header>
+        <div class="container">
+            <header>
+                <h1>Thank You for Your Order!</h1>
+                <p>
+                    Your order details are below and your delivery is on the
+                    way.
+                </p>
+            </header>
+            <div id="map"></div>
+        </div>
+
+        <div class="order-details">
+            <h7>Order Details</h7>
+            <p>
+                <strong>Address:</strong>
+                <span id="displayAddress">808 20th St S</span>
+            </p>
+            <p>
+                <strong>City:</strong> <span id="displayCity">Birmingham</span>
+            </p>
+            <p>
+                <strong>State:</strong> <span id="displayState">Alabama</span>
+            </p>
+            <p><strong>Zip:</strong> <span id="displayZip">35205</span></p>
+        </div>
+
+        <div class="faq">
+            <h3>Frequently Asked Questions</h3>
+            <p>
+                Can I return my order? Yes, returns can be made up to 24 hours
+                after ordering.
+            </p>
+            <p>
+                When will I receive my order? Typically, delivery takes 5-10
+                minutes based on delivery address.
+            </p>
+        </div>
+
+        <div class="promo-code">
+            <h10> <a href="Products.html" style="text-decoration: none; color: black;">Order Again</a></h10>
+            <p>Use code "DroneMed" to get free delivery on next purchase.</p>
+        </div>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img
+                        src="Logo.png"
+                        alt="Company Logo"
+                        class="footer-logo"
+                        width="200px"
+                        height="150px"
+                    />
+                    <!-- Additional brand information can go here -->
+                </div>
+                <div class="footer-section">
+                    <h4>OUR PRODUCTS</h4>
+                    <ul>
+                        <li><a href="#">Medical Products Finder</a></li>
+                        <li><a href="#">Drone-Med Solutions</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONSUMER HEALTH DATA NOTICE</h4>
+                    <ul>
+                        <li><a href="#">Find a Specialist</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+                <!-- Repeat the above div for each column in the footer -->
+                <div class="footer-section">
+                    <h4>CONTACT US</h4>
+                    <ul>
+                        <li><a href="#">Countries and Regions</a></li>
+                        <li><a href="#">User Content Permission Terms</a></li>
+                        <!-- Add more list items here -->
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    This site is intended for US consumers. Cookies and related
+                    technology are used for advertising. To learn more or
+                    opt-out, visit AdChoices and our Privacy Policy.
+                </p>
+                <p>
+                    Drone-Med does not treat underlying Medical conditions. MVE
+                    is a registered trademark of DFB Technology, Ltd. Patent No.
+                    6,709,663. © 2024 Drone-Med
+                </p>
+                <div class="social-media">
+                    <!-- Social media icons -->
+                    <img
+                        src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
+                    />
+                    <img
+                        src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-white-icon.png"
+                    />
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1024px-Instagram-Icon.png"
+                    />
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            function initMap() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const address = urlParams.get("address");
+                const city = urlParams.get("city");
+                const state = urlParams.get("state");
+                const zip = urlParams.get("zip");
+
+                document.getElementById("displayAddress").textContent = address;
+                document.getElementById("displayCity").textContent = city;
+                document.getElementById("displayState").textContent = state;
+                document.getElementById("displayZip").textContent = zip;
+
+                const fullAddress = `${address}, ${city}, ${state} ${zip}`;
+                const geocoder = new google.maps.Geocoder();
+                const map = new google.maps.Map(
+                    document.getElementById("map"),
+                    {
+                        center: { lat: 33.500566, lng: -86.806731 },
+                        zoom: 12,
+                    }
+                );
+
+                geocoder.geocode(
+                    { address: fullAddress },
+                    (results, status) => {
+                        if (status === "OK") {
+                            map.setCenter(results[0].geometry.location);
+                            new google.maps.Marker({
+                                map: map,
+                                position: results[0].geometry.location,
+                                title: fullAddress,
+                            });
+                        } else {
+                            console.error(
+                                "Geocode was not successful for the following reason: " +
+                                    status
+                            );
+                            document.getElementById("map").innerHTML =
+                                "Error: Address not found.";
+                        }
+                    }
+                );
+            }
+        </script>
+        <script src="script.js"></script>
+    </body>
+</html>
